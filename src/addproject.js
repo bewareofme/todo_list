@@ -1,11 +1,9 @@
 import addtask from './addtask.js';
 
 export default function addproject(){
-    console.log(101)
 //selectors
 let count=0
 const deleted=document.querySelector('.project-delete')
-const display=document.querySelector('.display-text')
 const addbutton=document.querySelector('.project-newtask')
 const sidebar=document.querySelector('.sidebar-projects')
 const cancelbtn=document.createElement('button')
@@ -35,9 +33,7 @@ cancelbtn.addEventListener('click',()=>{
     sidebar.appendChild(addbutton);
     form.remove();
 })
-deleted.addEventListener('click',(e)=>{
-    console.log(e)
-})
+
 
 //functions
 function forms(){
@@ -65,10 +61,12 @@ sidebar.appendChild(createbutton)
 const projectbuttons =document.querySelectorAll('.project-button')
 
 projectbuttons.forEach((button)=>{
-    button.addEventListener('click',()=>{
+    button.addEventListener('click',(e)=>{
+    
      let buttonattribute=button.getAttribute('project-id')
      render(buttonattribute)
-     addtask();
+     const renderobjecttext=document.querySelector(`div[project-ids='${buttonattribute}']>.display-text`)
+     renderobjecttext.textContent=button.textContent
     })
 })}
 function render(projectid){
@@ -77,6 +75,8 @@ function render(projectid){
         project.setAttribute("style","display:none;")
     })
     const renderobject=document.querySelector(`div[project-ids='${projectid}']`)
+    
+
     renderobject.setAttribute("style","display:block;")
 }
 function projectcreate(){
@@ -91,7 +91,7 @@ function projectcreate(){
     displaytext.classList.add("display-text")
     projectdelete.classList.add("project-delete")
     inputcreate.classList.add("taskinput")
-    addtaska.classList.add("addtask")
+    addtaska.classList.add("add-task")
     inputcreate.setAttribute("name","task")
     inputcreate.setAttribute("type","text")
     projectdelete.textContent="delete project"
@@ -101,7 +101,18 @@ function projectcreate(){
     project.setAttribute("project-ids",`${lastChildProjectId}`)
     displays.appendChild(project)
     project.setAttribute("style","display:none;")
-    addtask();
+    projectdelete.addEventListener('click',(e)=>{
+        console.log(e)
+        console.log(e.path[1])
+        const buttonremovedid=e.path[1].getAttribute('project-ids')
+        console.log(buttonremovedid);
+        const buttonremove=document.querySelector(`button[project-id='${buttonremovedid}']`)
+        buttonremove.remove();
+        e.path[1].remove();
+    
+    })
+    addtask(lastChildProjectId);
+
 }
 }
 

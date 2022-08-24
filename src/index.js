@@ -3,4 +3,4 @@ import addproject from './addproject.js';
 import addtask from './addtask.js';
 
 addproject();
-addtask();
+addtask(0);

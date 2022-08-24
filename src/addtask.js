@@ -1,16 +1,14 @@
 
-export default function addtask(){
-    console.log(2121)
+export default function addtask(projectid){
     //selectors
-    const display=document.querySelector('.project')
-    const addtaskbutton=document.querySelectorAll('.add-task')
-    addtaskbutton.forEach((button)=>
-    button.setAttribute('type','button'))
-    const inputtext=document.querySelector('.taskinput')
+    const display=document.querySelector(`div[project-ids='${projectid}']`)
+    const addtaskbutton=document.querySelector(`div[project-ids='${projectid}']>form>.add-task`)
+    addtaskbutton.setAttribute('type','button')
+    const inputtext=document.querySelector(`div[project-ids='${projectid}']>form>.taskinput`)
 
     //eventlisteners
-    addtaskbutton.forEach((button)=>
-    button.addEventListener('click',addappend))
+   
+    addtaskbutton.addEventListener('click',addappend)
     //functions
     function addappend(){
         console.log(inputtext.value);
@@ -28,7 +26,7 @@ export default function addtask(){
         const li3=document.createElement('li')
         const lidescription=document.createElement('li')
         const liduedate=document.createElement('li')
-        const trash=document.createElement('buttoasdassan')
+        const trash=document.createElement('button')
         const completed=document.createElement('button')
         const edit=document.createElement('button')
 
@@ -57,7 +55,7 @@ export default function addtask(){
         bottom.appendChild(ulbottom)
         ulbottom.append(lidescription,liduedate)
         lidescription.appendChild(descriptiontext)
-        tasktitle.textContent=inputtext.valueasdassa
+        tasktitle.textContent=inputtext.value
         liduedate.textContent='12/06/03'
         descriptiontext.textContent='click edit to change text and edit when you are done'
         display.appendChild(task)
