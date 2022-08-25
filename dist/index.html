@@ -14,10 +14,9 @@
         <div class="second-row">
             <div class="sidebar">
                 <div class="dates">Dates
-                    <button class="sidebar-today">Today</button>
-                    <button class="sidebar-tommorow">Tommorow</button>
-                    <button class="sidebar-week">This Week</button>
-                    <button class="sidebar-month">This Month</button>
+                    <button class="sidebar-today" project-id="1">Today</button>
+                    <button class="sidebar-tommorow" project-id="2">Tommorow</button>
+                    <button class="sidebar-month" project-id="3">This Month</button>
                 </div>
                 <div class="sidebar-projects">Projects
                     <button class="project-button" project-id="0">default</button>
@@ -26,11 +25,20 @@
             </div>
             <div class="display">
                 <div class="project" project-ids=0>
-                <div class="display-text">default</div>
-                <form action="">
-                <input type="text" name="task" class="taskinput">
-                <button class="add-task">Add new task</button>
-                </form>
+                    <div class="display-text">default</div>
+                    <form action="">
+                    <input type="text" name="task" class="taskinput">
+                    <button class="add-task">Add new task</button>
+                    </form>
+                </div>
+                <div class="project" project-ids=1 style="display:none;">
+                    <div class="display-text">today</div>
+                </div>
+                <div class="project" project-ids=2 style="display:none;">
+                    <div class="display-text">tommorow</div>
+                </div>
+                <div class="project" project-ids=3 style="display:none;">
+                    <div class="display-text">This month</div>
                 </div>
             </div>
         </div>

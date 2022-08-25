@@ -1,4 +1,5 @@
 import addtask from './addtask.js';
+import {format,addDays} from "date-fns";
 
 export default function addproject(){
 //selectors
@@ -12,11 +13,76 @@ const form=document.createElement('form')
 const input=document.createElement('input')
 const buttoncontainer=document.createElement('div')
 const displays=document.querySelector('.display')
-//project selectors
+//date selectors
+const today=document.querySelector('.sidebar-today')
+const tommorow=document.querySelector('.sidebar-tommorow')
+const month=document.querySelector('.sidebar-month')
+const premierla=document.querySelector(`button[project-id='0']`)
+premierla.addEventListener('click',()=>{
+render(0);})
 
 
 
 //eventlisteners
+today.addEventListener('click',()=>{
+    const date=new Date();
+    const dateformat=format(date,"yyyy-MM-dd")
+    const todaytasks=document.querySelectorAll('.inputdate')
+    let buttonattribute=today.getAttribute('project-id')
+    render(buttonattribute)
+    const renderobjecttext=document.querySelector(`div[project-ids='${buttonattribute}']>.display-text`)
+    const todayproject=document.querySelector(`div[project-ids='${buttonattribute}']`)
+    renderobjecttext.textContent=today.textContent
+    todaytasks.forEach((task)=>{
+        if(task.value===dateformat){
+            console.log(task.parentElement.parentElement.parentElement.parentElement.getAttribute("today"));
+            if(task.parentElement.parentElement.parentElement.parentElement.getAttribute("today")==="true")return;
+                task.parentElement.parentElement.parentElement.parentElement.setAttribute("today","true")
+                const todayclone= task.parentElement.parentElement.parentElement.parentElement.cloneNode(true)
+                todayproject.appendChild(todayclone)
+            }
+    })
+})
+tommorow.addEventListener('click',()=>{
+    const date=new Date();
+    const tommorowdate=addDays(date,1)
+    const tommorowdateformat=format(tommorowdate,"yyyy-MM-dd")
+    const tommorowtasks=document.querySelectorAll('.inputdate')
+    let buttonattribute=tommorow.getAttribute('project-id')
+    render(buttonattribute)
+    const renderobjecttext=document.querySelector(`div[project-ids='${buttonattribute}']>.display-text`)
+    renderobjecttext.textContent=tommorow.textContent
+    const tommorowproject=document.querySelector(`div[project-ids='${buttonattribute}']`)
+    tommorowtasks.forEach((task)=>{
+        if(task.value===tommorowdateformat){
+            if(task.parentElement.parentElement.parentElement.parentElement.getAttribute("tommorow")==="true")return;
+            task.parentElement.parentElement.parentElement.parentElement.setAttribute("tommorow","true")
+            const tommorowclone= task.parentElement.parentElement.parentElement.parentElement.cloneNode(true)
+            tommorowproject.appendChild(tommorowclone)
+        }
+    })
+    
+})
+month.addEventListener('click',()=>{
+    const date=new Date();
+    const dateformat=format(date,"yyyy-MM-dd")
+    const monthdate=date.getMonth()
+    const tommorowtasks=document.querySelectorAll('.inputdate')
+    let buttonattribute=month.getAttribute('project-id')
+    render(buttonattribute)
+    const renderobjecttext=document.querySelector(`div[project-ids='${buttonattribute}']>.display-text`)
+    renderobjecttext.textContent=month.textContent
+    const tommorowproject=document.querySelector(`div[project-ids='${buttonattribute}']`)
+    tommorowtasks.forEach((task)=>{
+        task.value=new Date();
+        if(task.value.getMonth() ===monthdate){
+            if(task.parentElement.parentElement.parentElement.parentElement.getAttribute("month")==="true")return;
+            task.parentElement.parentElement.parentElement.parentElement.setAttribute("month","true")
+            const tommorowclone= task.parentElement.parentElement.parentElement.parentElement.cloneNode(true)
+            tommorowproject.appendChild(tommorowclone)
+        }
+    })
+})
 addbutton.addEventListener('click',()=>{
     forms();
     addbutton.remove();

@@ -16,7 +16,7 @@ export default function addtask(projectid){
         const task=document.createElement('div')
         const top=document.createElement('div')
         const taskoptions=document.createElement('div')
-        const bottom=document.createElement('divasdassa')
+        const bottom=document.createElement('div')
         const descriptiontext=document.createElement('div')
         const tasktitle=document.createElement('div')
         const ultop=document.createElement('ul')
@@ -29,6 +29,10 @@ export default function addtask(projectid){
         const trash=document.createElement('button')
         const completed=document.createElement('button')
         const edit=document.createElement('button')
+        const inputdate=document.createElement('input')
+        inputdate.setAttribute('type','date')
+        inputdate.classList.add('inputdate')
+
 
         task.classList.add('task')
         top.classList.add('top')
@@ -54,16 +58,16 @@ export default function addtask(projectid){
         li3.appendChild(edit)
         bottom.appendChild(ulbottom)
         ulbottom.append(lidescription,liduedate)
+        liduedate.appendChild(inputdate)
+ 
         lidescription.appendChild(descriptiontext)
         tasktitle.textContent=inputtext.value
-        liduedate.textContent='12/06/03'
         descriptiontext.textContent='click edit to change text and edit when you are done'
         display.appendChild(task)
         trash.addEventListener('click',(e)=>{
             e.path[5].remove();
         })
         edit.addEventListener('click',(e)=>{
-            console.log(e.path[5].children[1].children[0].children[0].getAttribute('contenteditable'))
             if(e.path[5].children[1].children[0].children[0].children[0].getAttribute('contenteditable')==='true'){
                 e.path[5].children[1].children[0].children[0].children[0].setAttribute('contenteditable','false')
                 e.path[5].children[0].children[0].setAttribute('contenteditable','fa')
